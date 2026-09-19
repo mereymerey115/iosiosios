@@ -7,7 +7,7 @@ void processOrder({
   double finalDeliveryFee = deliveryFee??500;
   double discount = 0;
 
-  if(promoCode=='SAVE'){
+  if(promoCode=='SAVE10'){
     discount = itemPrice*0.10;
   }
   double finalTotal = itemPrice - discount + finalDeliveryFee;
