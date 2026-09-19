@@ -26,11 +26,7 @@ class Library {
 void main() {
   Library library = Library();
 
-  library.addBook(Book("Harry Potter", "J.K. Rowling", 5000));
-  library.addBook(Book("1984", "George Orwell", 3500, isBorrowed: true));
-  library.addBook(Book("The Hobbit", "J.R.R. Tolkien", 4500));
-  library.addBook(Book("The Alchemist", "Paulo Coelho", 3000));
-
+  library.addBook(Book("Culpa Mia", "Mercedes Ron", 5000));
   print("Available books:");
 
   for (Book book in library.getAvailableBooks()) {

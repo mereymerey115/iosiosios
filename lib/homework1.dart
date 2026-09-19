@@ -2,48 +2,46 @@ void main(){
   //Task1
   for(int i=1; i<=10; i++){
     for(int j=1; j<=10; j++){
-      print("$i*$j=${i*j}");
+      print("$i * $j = ${i*j}");
     }
   }
 
   //Task2
-  int day = 5;
-  int month = 9;
-  int year = 2026;
-  bool leapYear = (year%400==0)||(year%4==0&&year%100!=0);
+  int day =31;
+  int month=12;
+  int year=2026;
+
   int daysInMonth;
 
-  if(month==2){
-    if(leapYear){
-      daysInMonth = 29;
+  if(month == 2){
+    if(year % 400 == 0 || (year%4 == 0 && year % 100 !=0)){
+      daysInMonth= 29;
     }
     else{
-      daysInMonth = 28;
+      daysInMonth= 28;
     }
-  }
-  else if(month==4||month==6||month==9||month==11){
+  }else if (month == 4 || month == 6 || month ==9 || month == 11){
     daysInMonth = 30;
-  }
-  else{
+  }else{
     daysInMonth = 31;
   }
+  if(month < 1 || month > 12 || day<1 || day> daysInMonth){
+    print("Invalid date");
+  }else{
+    if( day <daysInMonth){
+      day++;
+    }else{
+      day=1;
 
-  if(day<1||day>daysInMonth){
-    print("invalid date");
-  }
-  else{
-    day++;
-  }
-
-  if(day>daysInMonth){
-    day = 1;
-    month++;
-    if(month>12){
-      month = 1;
-      month++;
+      if(month < 12){
+        month++;
+      }else{
+        month=1;
+        year++;
+      }
     }
+    print("$day.$month.$year");
   }
-  print("$day.$month.$year");
 
   //Task3
   String t = "flutter mobile development";
@@ -88,6 +86,4 @@ void main(){
   else{
     print("prime emes");
   }
-
-
 }
