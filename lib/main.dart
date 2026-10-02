@@ -11,114 +11,181 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const ProfilePage(),
+      home: const ProfileCardScreen(),
     );
   }
 }
 
-class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key});
+class ProfileCardScreen extends StatefulWidget {
+  const ProfileCardScreen({super.key});
 
   @override
-  State<ProfilePage> createState() => _ProfilePageState();
+  State<ProfileCardScreen> createState() => _ProfileCardScreenState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
-  bool isFollowing = false;
-  bool isLiked = false;
-  int likes = 10;
+class _ProfileCardScreenState extends State<ProfileCardScreen> {
+  bool _isFollowing = false;
+  bool _isLiked = false;
 
-  void follow() {
-    setState(() {
-      isFollowing = !isFollowing;
-    });
-  }
-
-  void like() {
-    setState(() {
-      if (isLiked == false) {
-        isLiked = true;
-        likes++;
-      } else {
-        isLiked = false;
-        likes--;
-      }
-    });
-  }
-
-  void reset() {
-    setState(() {
-      isFollowing = false;
-      isLiked = false;
-      likes = 10;
-    });
-  }
+  int _followerCount = 999;
+  int _likesCount = 789;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Profile'),
+        title: const Text('Developer Profile'),
+        backgroundColor: Colors.indigo,
+        foregroundColor: Colors.white,
+        centerTitle: true,
       ),
 
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const CircleAvatar(
-              radius: 50,
-              child: Icon(
-                Icons.person,
-                size: 60,
-              ),
+        child: Card(
+          elevation: 6,
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const CircleAvatar(
+                  radius: 40,
+                  backgroundColor: Colors.lime,
+                  child: Icon(
+                    Icons.person,
+                    size: 50,
+                    color: Colors.white,
+                  ),
+                ),
+
+                const SizedBox(height: 16),
+
+                const Text(
+                  'Merey Sharipkhan',
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+
+                const Text('Flutter Student'),
+
+                const SizedBox(height: 20),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Column(
+                      children: [
+                        Text(
+                          '$_followerCount',
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const Text(
+                          'Followers',
+                          style: TextStyle(color: Colors.grey),
+                        ),
+                      ],
+                    ),
+
+                    Column(
+                      children: [
+                        Text(
+                          '$_likesCount',
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const Text(
+                          'Likes ❤️',
+                          style: TextStyle(color: Colors.grey),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+
+                const SizedBox(height: 24),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    ElevatedButton.icon(
+                      onPressed: _toggleFollow,
+                      icon: Icon(
+                        _isFollowing
+                            ? Icons.check
+                            : Icons.person_add,
+                      ),
+                      label: Text(
+                        _isFollowing ? 'Following' : 'Follow',
+                      ),
+                    ),
+
+                    const SizedBox(width: 12),
+
+                    OutlinedButton.icon(
+                      onPressed: _toggleLike,
+                      icon: Icon(
+                        _isLiked
+                            ? Icons.favorite
+                            : Icons.favorite_border,
+                      ),
+                      label: Text(
+                        _isLiked ? 'Liked' : 'Like',
+                      ),
+                    ),
+                  ],
+                ),
+
+                const SizedBox(height: 12),
+
+                TextButton(
+                  onPressed: _reset,
+                  child: const Text('Reset'),
+                ),
+              ],
             ),
-
-            const SizedBox(height: 20),
-
-            const Text(
-              'Merey',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-
-            const Text('Flutter Student'),
-
-            const SizedBox(height: 20),
-
-            ElevatedButton(
-              onPressed: follow,
-              child: Text(
-                isFollowing ? 'Following' : 'Follow',
-              ),
-            ),
-
-            const SizedBox(height: 10),
-
-            ElevatedButton(
-              onPressed: like,
-              child: Text(
-                isLiked ? 'Unlike ❤️' : 'Like 🤍',
-              ),
-            ),
-
-            const SizedBox(height: 10),
-
-            Text(
-              'Likes: $likes',
-              style: const TextStyle(fontSize: 18),
-            ),
-
-            const SizedBox(height: 20),
-
-            ElevatedButton(
-              onPressed: reset,
-              child: const Text('Reset'),
-            ),
-          ],
+          ),
         ),
       ),
     );
+  }
+
+  void _toggleFollow() {
+    setState(() {
+      _isFollowing = !_isFollowing;
+
+      if (_isFollowing) {
+        _followerCount++;
+      } else {
+        _followerCount--;
+      }
+    });
+  }
+
+  void _toggleLike() {
+    setState(() {
+      _isLiked = !_isLiked;
+
+      if (_isLiked) {
+        _likesCount++;
+      } else {
+        _likesCount--;
+      }
+    });
+  }
+
+  void _reset() {
+    setState(() {
+      _isFollowing = false;
+      _isLiked = false;
+      _followerCount = 999;
+      _likesCount = 789;
+    });
   }
 }
