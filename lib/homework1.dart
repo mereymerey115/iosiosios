@@ -1,89 +1,88 @@
 void main(){
-  //Task1
   for(int i=1; i<=10; i++){
     for(int j=1; j<=10; j++){
-      print("$i * $j = ${i*j}");
+      print("$i*$j=${i*j}");
     }
   }
 
-  //Task2
-  int day =31;
-  int month=12;
-  int year=2026;
 
+
+  int day = 28;
+  int month = 2;
+  int year = 2000;
   int daysInMonth;
-
-  if(month == 2){
-    if(year % 400 == 0 || (year%4 == 0 && year % 100 !=0)){
-      daysInMonth= 29;
+  if(month==2){
+    if(year%400==0||(year%4==0&&year%100!=0)){
+      daysInMonth=29;
+    }else{
+      daysInMonth=28;
     }
-    else{
-      daysInMonth= 28;
-    }
-  }else if (month == 4 || month == 6 || month ==9 || month == 11){
-    daysInMonth = 30;
+  }else if(month==4||month==6||month==9||month==11){
+    daysInMonth=30;
   }else{
-    daysInMonth = 31;
+    daysInMonth=31;
   }
-  if(month < 1 || month > 12 || day<1 || day> daysInMonth){
-    print("Invalid date");
+
+  if(month<1||month>12||day<1||day>daysInMonth){
+    print("invalid");
   }else{
-    if( day <daysInMonth){
+    if(day<daysInMonth){
       day++;
     }else{
       day=1;
-
-      if(month < 12){
+      if(month<12){
         month++;
       }else{
         month=1;
         year++;
       }
     }
-    print("$day.$month.$year");
   }
+  print("$day.$month.$year");
 
-  //Task3
-  String t = "flutter mobile development";
+
+
+
+  String t = "merey";
   int count = 0;
   for(int i=0; i<t.length; i++){
     String m = t[i];
-    if(m=='a'||m=='e'||m=='i'||m=='o'||m=='u'){
+    if(m=="a"||m=="e"||m=="i"||m=="u"||m=="o"){
       count++;
     }
-  }
-  print(count);
+  }print(count);
 
-  //Task4
-  List<int> numbers = [14, 88, 3, 42, 99, 12, 67];
-  int max = numbers[0];
+
+
+
+
+  List<int> numbers = [5,8,15,19,1];
   int min = numbers[0];
-  for(int i=1; i<numbers.length; i++){
-    if(numbers[i]<min){
-      min=numbers[i];
-    }
+  int max = numbers[0];
+  for(int i=0; i<numbers.length; i++){
     if(numbers[i]>max){
-      max=numbers[i];
+      max = numbers[i];
+    }else if(numbers[i]<min){
+      min = numbers[i];
     }
   }
-  print("max:$max");
-  print("min:$min");
+  print("$min, $max");
 
-  //Task5
-  int number = 3;
+
+
+  int number = 5;
   bool isPrime = true;
   if(number<2){
-    isPrime = false;
+    isPrime=false;
   }
   for(int i=2; i<number; i++){
     if(number%i==0){
-      isPrime = false;
+      isPrime=false;
     }
   }
   if(isPrime){
     print("prime");
-  }
-  else{
+  }else{
     print("prime emes");
   }
 }

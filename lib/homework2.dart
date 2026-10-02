@@ -1,45 +1,41 @@
-double balance = 5000;
 void checkBalance({
   required String name,
-  required double balance,
-})=>
-    print('$name balance: $balance');
+  required double balance
+})=>print("$name, $balance");
 double deposit({
   required double currentBalance,
-  double? amount,
+  double?amount
 }){
   double money = amount??0.0;
   currentBalance = currentBalance+money;
-  print('Deposit:$money');
-  print('New balance:$currentBalance');
+  print(money);
+  print(currentBalance);
   return currentBalance;
 }
-double withdarw({
-  required String name,
+double withdraw({
   required double currentBalance,
-  double? amount,
-  int? pinCode,
+  double?amount,
+  int?pinCode
 }){
-  int pin = pinCode??0000;
+  int pin = pinCode??1234;
   double money = amount??0.0;
   if(pin!=1234){
-    print('Incorrect PIN');
+    ("incorrect");
     return currentBalance;
   }
   if(money>currentBalance){
-    print('Insufficient funds');
+    ("aqsha az ");
     return currentBalance;
   }
-  currentBalance = currentBalance - money;
-  print('$name withdew:$money');
-  print('New balance:$currentBalance');
+
+  print(money);
+  print(currentBalance);
   return currentBalance;
 }
 void main(){
-  String name = "Merey";
   double balance = 5000;
-   checkBalance(name: name, balance: balance);
-   balance = deposit(currentBalance: balance, amount: 1000,);
-   balance = withdarw(name: name, currentBalance: balance, amount: 2000, pinCode: 1234,);
-   checkBalance(name: name, balance: balance);
+  checkBalance(name: "Merey", balance: balance);
+  balance = deposit(currentBalance: balance, amount: 500);
+  balance = withdraw(currentBalance: balance, pinCode: 1234, amount: 200);
+  checkBalance(name: "Merey", balance: balance);
 }

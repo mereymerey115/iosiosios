@@ -1,23 +1,27 @@
-void processOrder({
+void proccessOrder({
   required String orderId,
   required double itemPrice,
-  String? promoCode,
-  double? deliveryFee,
+  String?promoCode,
+  double?deliveryFee
 }){
   double finalDeliveryFee = deliveryFee??500;
+  if(finalDeliveryFee<1000){
+    finalDeliveryFee = 1000;
+  }
+  if(itemPrice>4000){
+    finalDeliveryFee=finalDeliveryFee*0.12+finalDeliveryFee;
+  }
   double discount = 0;
-
-  if(promoCode=='SAVE10'){
+  if(promoCode=="SAVE10"){
     discount = itemPrice*0.10;
   }
-  double finalTotal = itemPrice - discount + finalDeliveryFee;
-  print('Order ID: $orderId');
-  print('Item price: $itemPrice');
-  print('Promo code: ${promoCode??"None"}');
-  print('Discount:$discount');
-  print('Delivery fee: $finalDeliveryFee');
-  print('Final total: $finalTotal');
+  double total = itemPrice-discount+finalDeliveryFee;
+  print(orderId);
+  print(itemPrice);
+  print(promoCode);
+  print(finalDeliveryFee);
+  print(total);
 }
 void main(){
-  processOrder(orderId: '001', itemPrice: 7000, promoCode: 'SAVE10',);
+  proccessOrder(orderId: "01", itemPrice: 5000, promoCode:"SAVE10", deliveryFee: 300);
 }
