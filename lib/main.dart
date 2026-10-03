@@ -24,9 +24,6 @@ class ProfileCardScreen extends StatefulWidget {
 }
 
 class _ProfileCardScreenState extends State<ProfileCardScreen> {
-  bool _isFollowing = false;
-  bool _isLiked = false;
-
   int _followerCount = 999;
   int _likesCount = 789;
 
@@ -45,6 +42,7 @@ class _ProfileCardScreenState extends State<ProfileCardScreen> {
           elevation: 6,
           child: Padding(
             padding: const EdgeInsets.all(24.0),
+
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -68,7 +66,7 @@ class _ProfileCardScreenState extends State<ProfileCardScreen> {
                   ),
                 ),
 
-                const Text('Flutter Student'),
+                const Text('Student'),
 
                 const SizedBox(height: 20),
 
@@ -84,10 +82,7 @@ class _ProfileCardScreenState extends State<ProfileCardScreen> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        const Text(
-                          'Followers',
-                          style: TextStyle(color: Colors.grey),
-                        ),
+                        const Text('Followers'),
                       ],
                     ),
 
@@ -100,10 +95,7 @@ class _ProfileCardScreenState extends State<ProfileCardScreen> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        const Text(
-                          'Likes ❤️',
-                          style: TextStyle(color: Colors.grey),
-                        ),
+                        const Text('Likes'),
                       ],
                     ),
                   ],
@@ -111,39 +103,30 @@ class _ProfileCardScreenState extends State<ProfileCardScreen> {
 
                 const SizedBox(height: 24),
 
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    ElevatedButton.icon(
-                      onPressed: _toggleFollow,
-                      icon: Icon(
-                        _isFollowing
-                            ? Icons.check
-                            : Icons.person_add,
-                      ),
-                      label: Text(
-                        _isFollowing ? 'Following' : 'Follow',
-                      ),
-                    ),
 
-                    const SizedBox(width: 12),
-
-                    OutlinedButton.icon(
-                      onPressed: _toggleLike,
-                      icon: Icon(
-                        _isLiked
-                            ? Icons.favorite
-                            : Icons.favorite_border,
-                      ),
-                      label: Text(
-                        _isLiked ? 'Liked' : 'Like',
-                      ),
-                    ),
-                  ],
+                ElevatedButton(
+                  onPressed: _follow,
+                  child: const Text('Follow'),
                 ),
 
-                const SizedBox(height: 12),
+                ElevatedButton(
+                  onPressed: _unfollow,
+                  child: const Text('Unfollow'),
+                ),
 
+
+                ElevatedButton(
+                  onPressed: _like,
+                  child: const Text('Like'),
+                ),
+
+
+                ElevatedButton(
+                  onPressed: _dislike,
+                  child: const Text('Dislike'),
+                ),
+
+                // RESET
                 TextButton(
                   onPressed: _reset,
                   child: const Text('Reset'),
@@ -156,34 +139,32 @@ class _ProfileCardScreenState extends State<ProfileCardScreen> {
     );
   }
 
-  void _toggleFollow() {
+  void _follow() {
     setState(() {
-      _isFollowing = !_isFollowing;
-
-      if (_isFollowing) {
-        _followerCount++;
-      } else {
-        _followerCount--;
-      }
+      _followerCount++;
     });
   }
 
-  void _toggleLike() {
+  void _unfollow() {
     setState(() {
-      _isLiked = !_isLiked;
+      _followerCount--;
+    });
+  }
 
-      if (_isLiked) {
-        _likesCount++;
-      } else {
-        _likesCount--;
-      }
+  void _like() {
+    setState(() {
+      _likesCount++;
+    });
+  }
+
+  void _dislike() {
+    setState(() {
+      _likesCount--;
     });
   }
 
   void _reset() {
     setState(() {
-      _isFollowing = false;
-      _isLiked = false;
       _followerCount = 999;
       _likesCount = 789;
     });
