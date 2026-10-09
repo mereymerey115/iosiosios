@@ -44,7 +44,7 @@ class _ProductScreenState extends State<ProductScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
 
-              // Phone image and bookmark
+
               Stack(
                 children: [
                   Container(
@@ -94,7 +94,7 @@ class _ProductScreenState extends State<ProductScreen> {
 
               const SizedBox(height: 12),
 
-              // Rating and price
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -118,7 +118,7 @@ class _ProductScreenState extends State<ProductScreen> {
 
               const SizedBox(height: 20),
 
-              // Category badges
+
               const Wrap(
                 spacing: 8,
                 runSpacing: 8,
@@ -149,7 +149,7 @@ class _ProductScreenState extends State<ProductScreen> {
         ),
       ),
 
-      // Bottom sticky button
+
       bottomNavigationBar: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(12),
