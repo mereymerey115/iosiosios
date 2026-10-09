@@ -100,45 +100,30 @@ class _ProfileCardScreenState extends State<ProfileCardScreen> {
 
                     Column(
                       children: [
-                        Text(
-                          '$_likesCount',
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
+                        ElevatedButton.icon(
+                          onPressed: _toggleFollow,
+                          icon: Icon(
+                            _isFollowing
+                                ? Icons.check
+                                : Icons.person_add,
+                          ),
+                          label: Text(
+                            _isFollowing
+                                ? 'Following'
+                                : 'Follow',
                           ),
                         ),
-                        const Text(
-                          'Likes',
-                          style: TextStyle(
-                            color: Colors.grey,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
 
-                const SizedBox(height: 24),
+                        const SizedBox(height: 12),
 
-                ElevatedButton.icon(
-                  onPressed: _toggleFollow,
-                  icon: Icon(
-                    _isFollowing
-                        ? Icons.check
-                        : Icons.person_add,
-                  ),
-                  label: Text(
-                    _isFollowing
-                        ? 'Following'
-                        : 'Follow',
-                  ),
-                ),
 
-                const SizedBox(height: 12),
+
 
                 Row(
+
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
+
                     OutlinedButton.icon(
                       onPressed: _incrementLike,
                       icon: const Icon(Icons.favorite),
@@ -150,6 +135,25 @@ class _ProfileCardScreenState extends State<ProfileCardScreen> {
                       icon: const Icon(Icons.thumb_down),
                       label: const Text('Dislike'),
                     ),
+                    Text(
+                      '$_likesCount',
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const Text(
+                      'Likes',
+                      style: TextStyle(
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ],
+                ),
+                      ],
+                    ),
+
+                    const SizedBox(height: 24),
                   ],
                 ),
 
