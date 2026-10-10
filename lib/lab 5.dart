@@ -27,6 +27,20 @@ class _ProductScreenState extends State<ProductScreen> {
   bool isSaved = false;
   int cartCount = 0;
 
+  void addToCart() {
+    setState(() {
+      cartCount++;
+    });
+  }
+
+  void removeFromCart() {
+    if (cartCount > 0) {
+      setState(() {
+        cartCount--;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,117 +52,118 @@ class _ProductScreenState extends State<ProductScreen> {
       ),
 
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Stack(
+              children: [
+                Container(
+                  height: 250,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Colors.indigo.shade50,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: const Icon(
+                    Icons.smartphone,
+                    size: 140,
+                    color: Colors.indigo,
+                  ),
+                ),
 
-
-              Stack(
-                children: [
-                  Container(
-                    height: 250,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: Colors.indigo.shade50,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: const Icon(
-                      Icons.smartphone,
-                      size: 140,
+                Positioned(
+                  top: 10,
+                  right: 10,
+                  child: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        isSaved = !isSaved;
+                      });
+                    },
+                    icon: Icon(
+                      isSaved
+                          ? Icons.bookmark
+                          : Icons.bookmark_border,
                       color: Colors.indigo,
                     ),
                   ),
-
-                  Positioned(
-                    top: 10,
-                    right: 10,
-                    child: IconButton(
-                      onPressed: () {
-                        setState(() {
-                          isSaved = !isSaved;
-                        });
-                      },
-                      icon: Icon(
-                        isSaved
-                            ? Icons.bookmark
-                            : Icons.bookmark_border,
-                        color: Colors.indigo,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-
-              const SizedBox(height: 20),
-
-              // Product title
-              const Text(
-                'Smartphone Pro 256GB',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
                 ),
+              ],
+            ),
+
+            const SizedBox(height: 20),
+
+
+            const Text(
+              'Smartphone Pro 256GB',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
               ),
+            ),
 
-              const SizedBox(height: 12),
+            const SizedBox(height: 12),
 
 
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Row(
-                    children: [
-                      Icon(Icons.star, color: Colors.orange),
-                      SizedBox(width: 5),
-                      Text('4.9'),
-                    ],
-                  ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Row(
+                  children: [
+                    Icon(Icons.star, color: Colors.orange),
+                    SizedBox(width: 5),
+                    Text('4.9'),
+                  ],
+                ),
 
-                  const Text(
+                const Flexible(
+                  child: Text(
                     '450 000 KZT',
+                    textAlign: TextAlign.end,
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                ],
+                ),
+              ],
+            ),
+
+            const SizedBox(height: 20),
+
+            const Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: [
+                Chip(label: Text('Electronics')),
+                Chip(label: Text('Smartphone')),
+                Chip(label: Text('256GB')),
+                Chip(label: Text('5G')),
+              ],
+            ),
+
+            const SizedBox(height: 20),
+
+            const Text(
+              'Modern smartphone with a powerful camera, '
+                  'fast performance and long battery life.',
+              style: TextStyle(fontSize: 16),
+            ),
+
+            const SizedBox(height: 20),
+
+
+            Text(
+              'Items in cart: $cartCount',
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
               ),
-
-              const SizedBox(height: 20),
-
-
-              const Wrap(
-                spacing: 8,
-                runSpacing: 8,
-                children: [
-                  Chip(label: Text('Electronics')),
-                  Chip(label: Text('Smartphone')),
-                  Chip(label: Text('256GB')),
-                  Chip(label: Text('5G')),
-                ],
-              ),
-
-              const SizedBox(height: 20),
-
-              const Text(
-                'Modern smartphone with a powerful camera, '
-                    'fast performance and long battery life.',
-                style: TextStyle(fontSize: 16),
-              ),
-
-              const SizedBox(height: 16),
-
-              Text(
-                'Items in cart: $cartCount',
-                style: const TextStyle(fontSize: 16),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
-
 
       bottomNavigationBar: SafeArea(
         child: Padding(
@@ -157,17 +172,38 @@ class _ProductScreenState extends State<ProductScreen> {
             children: [
               Expanded(
                 child: ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      cartCount++;
-                    });
-                  },
+                  onPressed: addToCart,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.indigo,
                     foregroundColor: Colors.white,
-                    padding: const EdgeInsets.all(16),
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 16,
+                    ),
                   ),
-                  child: const Text('Add to Cart'),
+                  child: const Text(
+                    'Add to Cart +',
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+
+              const SizedBox(width: 10),
+
+              Expanded(
+                child: ElevatedButton(
+                  onPressed:
+                  cartCount > 0 ? removeFromCart : null,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.red,
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 16,
+                    ),
+                  ),
+                  child: const Text(
+                    'Remove -',
+                    textAlign: TextAlign.center,
+                  ),
                 ),
               ),
             ],
