@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'phone.dart';
 import 'detail_screen.dart';

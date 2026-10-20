@@ -1,4 +1,3 @@
-
 class Phone {
   final String title;
   final String description;
