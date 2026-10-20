@@ -90,15 +90,21 @@ class FeedScreen extends StatelessWidget {
               ),
               Align(
                 alignment: Alignment.centerRight,
-                child: IconButton(
+                child:
+
+                IconButton(
                   icon: Icon(
-                    favorites.contains(phone)
+                    favorites.any((item) => item.title == phone.title)
                         ? Icons.favorite
                         : Icons.favorite_border,
-                    color: Colors.red,
+                    color: favorites.any((item) => item.title == phone.title)
+                        ? Colors.red
+                        : Colors.grey,
                   ),
                   onPressed: () => onFavorite(phone),
                 ),
+
+
               ),
             ],
           ),

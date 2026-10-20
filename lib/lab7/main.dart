@@ -22,15 +22,17 @@ class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0;
   List<Phone> favorites = [];
 
+
   void toggleFavorite(Phone phone) {
     setState(() {
-      if (favorites.contains(phone)) {
-        favorites.remove(phone);
+      if (favorites.any((item) => item.title == phone.title)) {
+        favorites.removeWhere((item) => item.title == phone.title);
       } else {
         favorites.add(phone);
       }
     });
   }
+
 
   @override
   Widget build(BuildContext context) {
