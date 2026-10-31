@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'product.dart';
-import 'product_list_item.dart';
-import 'product_grid_card.dart';
+import '../models/product.dart';
+import '../widgets/product_list_item.dart';
+import '../widgets/product_grid_card.dart';
 
 class CatalogScreen extends StatefulWidget {
   const CatalogScreen({super.key});
