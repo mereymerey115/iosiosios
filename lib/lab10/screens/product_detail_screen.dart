@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../models/product.dart';
@@ -24,8 +23,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   Widget build(BuildContext context) {
     final product = widget.product;
 
-    // FakeStoreAPI provides one product image.
-    // Three slides use the available image.
     final images = product.images.isEmpty
         ? <String>[]
         : List<String>.filled(3, product.imageUrl);
